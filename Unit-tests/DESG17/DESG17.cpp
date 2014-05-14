@@ -465,320 +465,317 @@ void Round(unsigned long long Key, unsigned long long *L, unsigned long long *R)
 	(*R) = (*R)^tem;
 }
 
-//void main(int argc, char* argv[])
-//{
-//	long starttime = clock();
-//
-//	if((argc-1)!=4){printf("\ninvalid program arguments.\n");exit(0);}
-//	unsigned char* pkey = 0;
-//	unsigned long keylength = 0;
-//	if(!loadkey((const char*)argv[3], &pkey, &keylength)){printf("\nerror loading plain text file.\n");exit(0);}
-//	keygenerator(pkey, keylength);
-//
-//	file* pplaintextfile = 0;
-//	file* pciphertextfile = 0;
-//
-//	if(stricmp(argv[1], "encrypt")==0)
-//	{
-//		pplaintextfile = fopen((const char*)argv[2], "r");
-//		if(pplaintextfile==0){
-//			printf("\nerror loading plaintext file.\n");
-//			exit(0);
-//		}
-//
-//		pciphertextfile = fopen((const char*)argv[4], "wb");
-//		if(pciphertextfile==0){printf("\nerror creating ciphertext file.\n");exit(0);}
-//		//
-//		//getting the file size
-//		fseek(pplaintextfile, 0, seek_end);
-//		int filelength = ftell(pplaintextfile);
-//		fseek(pplaintextfile, 0, seek_set);
-//
-//		
-//		char* plaintxtblock = new char[filelength]; // the block of data(64 bits)
-//		//cout<<
-//		
-//		char toto[8];	
-//		unsigned long long key = 29699430183026, blockright,mas,tem;
-//		int iterating = 0;
-//		unsigned long long l,r;	
-//		int flagdummy = 0;
-//		short sh=56, re=8;
-//		//reading the data from the file!
-//		while(iterating < filelength){
-//			if(flagdummy == 0)
-//			{
-//				block = 0;
-//				blockright=0;
-//				fread(&blockright,8,1,pplaintextfile);
-//							
-//				mas = 0x00000000000000ff;
-//				sh=56; re=8;
-//				if(filelength-8<iterating)
-//					cout<<"";
-//				for(int i =0; i<8;i++){//----------------------------
-//					tem = (blockright&mas);						
-//					if(i<4)
-//					{
-//						tem<<=sh;
-//						block|=tem;							
-//						sh-=16;
-//					}
-//					else
-//					{
-//						tem>>=re;
-//						block|=tem;	
-//						re+=16;
-//					}
-//					mas<<=8;
-//				}
-//				if(filelength%8==0 && iterating+8==filelength)
-//				{				
-//					iterating-=8;
-//					flagdummy = 1;				
-//				}
-//	
-//			}
-//			else 
-//				block = 0x0808080808080808;
-//			//
-//			//block = 0x00006520656d6169;//---------------------test block
-//			//k1 = 0x0000cb3d8b0e17f5;//-------------test key
-//			//check for the end block size	
-//			if(filelength%8!=0 && iterating+8>filelength)
-//			{
-//				unsigned long long data2add = 8-((filelength) % 8);
-//				unsigned long long temp = data2add;//data2add<<(8*(8-data2add));
-//				for(int i=0;i<data2add;i++)
-//				{
-//					block = block|temp;
-//					temp = data2add<<8*(i+1);//(8*((8-data2add)+(i+1)));
-//				}
-//			}
-//
-//			if(block == 0x7365637572697479)
-//				cout<<"";
-//		
-//			//ip
-//			block = perm(block, ip, 64, 64);
-//
-//			l = (block & 0xffffffff00000000)>>32;
-//			r = (block & 0x00000000ffffffff);
-//			//printf("%x", l);
-//			//r1
-//			round(k1,&l,&r);
-//			//r1
-//			round(k2,&l,&r);
-//			//r1
-//			round(k3,&l,&r);
-//			//r1
-//			round(k4,&l,&r);
-//			//r1
-//			round(k5,&l,&r);
-//			//r1
-//			round(k6,&l,&r);
-//			//r1
-//			round(k7,&l,&r);
-//			//r1
-//			round(k8,&l,&r);
-//			//r1
-//			round(k9,&l,&r);
-//			//r1
-//			round(k10,&l,&r);
-//			//r1
-//			round(k11,&l,&r);
-//			//r1
-//			round(k12,&l,&r);
-//			//r1
-//			round(k13,&l,&r);
-//			//r1
-//			round(k14,&l,&r);
-//			//r1
-//			round(k15,&l,&r);
-//			//r1
-//			round(k16,&l,&r);
-//
-//			//32-bit swap
-//			unsigned long long temp=0 ;
-//			temp= l;
-//			l=r;
-//			r=temp;
-//			block = 0;
-//			block = l;
-//			block <<=32;
-//			block|=r;
-//
-//			//inv ip
-//			block=perm( block, invip,  64, 64);	
-//
-//			char mybuffer[8];
-//				
-//
-//			char *c_ptr = (char*)&block;			
-//			//sprintf(mybuffer,"%c%c%c%c%c%c%c%c", c_ptr[7], c_ptr[6], c_ptr[5], c_ptr[4], c_ptr[3], c_ptr[2], c_ptr[1], c_ptr[0]);
-//			//cout<<mybuffer;
-//			fprintf( pciphertextfile, "%c%c%c%c%c%c%c%c",c_ptr[7], c_ptr[6], c_ptr[5], c_ptr[4], c_ptr[3], c_ptr[2], c_ptr[1], c_ptr[0]);
-//			//fwrite((const void*)&block, 8,1,pciphertextfile);
-//
-//			iterating+=8;
-//	
-//		}
-//
-//		long finishtime = clock();
-//
-//		printf("\nencryption completed successfully in %d ms\n", finishtime- starttime);
-//		cout<<"";
-//	}
-//	else if(stricmp(argv[1], "decrypt")==0)
-//	{
-//		pplaintextfile = fopen((const char*)argv[2], "w");
-//		if(pplaintextfile==0){printf("\nerror loading plaintext file.\n");exit(0);}
-//
-//		pciphertextfile = fopen((const char*)argv[4], "rb");
-//		if(pciphertextfile==0){printf("\nerror creating ciphertext file.\n");exit(0);}
-//		//
-//		//getting the file size
-//		fseek(pciphertextfile, 0, seek_end);
-//		int filelength = ftell(pciphertextfile);
-//		fseek(pciphertextfile, 0, seek_set);
-//		//
-//		unsigned long long tem=0,key = 0, blockright=0, mas;
-//		int iterating = 0;
-//		unsigned long long l = 0,r = 0;
-//		short sh=56, re=8; 
-//		unsigned char mybuffer[8];
-//		//filelength-=3;
-//		//reading the data from the file!
-//		while(iterating < filelength)
-//		{	
-//
-//
-//			//reading the 64-bit block						
-//			blockright=0;
-//			block=0;
-//			fread(&mybuffer,8,1,pciphertextfile);	
-//
-//			block |= mybuffer[7];
-//			tem = mybuffer[6];
-//			block |= tem<<8;
-//			tem = mybuffer[5];
-//			block |= tem<<16;
-//			tem = mybuffer[4];
-//			block |= tem<<24;
-//			tem = mybuffer[3];
-//			block |= tem<<32;
-//			tem = mybuffer[2];
-//			block |= tem<<40;
-//			tem = mybuffer[1];
-//			block |= tem<<48;
-//			tem = mybuffer[0];
-//			block |= tem<<56;	
-//
-//			//block = 0x0123456789abcdef;//---------------------test block
-//			//k16 = 0x0000cb3d8b0e17f5;//-------------test key
-//			// ip
-//			if(iterating ==296)
-//				cout<<"";
-//			block = perm(block, ip,  64, 64);
-//
-//			//
-//			l = (block & 0xffffffff00000000)>>32;
-//			r = (block & 0x00000000ffffffff);
-//		
-//			//r16
-//			round(k16,&l,&r);
-//			//r15
-//			round(k15,&l,&r);
-//			//r14
-//			round(k14,&l,&r);
-//			//r13
-//			round(k13,&l,&r);
-//			//r12
-//			round(k12,&l,&r);
-//			//r11
-//			round(k11,&l,&r);
-//			//r10
-//			round(k10,&l,&r);
-//			//r9
-//			round(k9,&l,&r);
-//			//r8
-//			round(k8,&l,&r);
-//			//r7
-//			round(k7,&l,&r);
-//			//r6
-//			round(k6,&l,&r);
-//			//r5
-//			round(k5,&l,&r);
-//			//r4
-//			round(k4,&l,&r);
-//			//r3
-//			round(k3,&l,&r);
-//			//r2
-//			round(k2,&l,&r);
-//			//r1
-//			round(k1,&l,&r);
-//			//
-//			//32-bit swap
-//			unsigned long long temp = 0;
-//			temp = l;
-//			l=r;
-//			r=temp;
-//			block = 0;
-//			block = l;
-//			block <<=32;
-//			block|=r;
-//
-//			// ip
-//			block=perm( block, invip,  64, 64);
-//
-//			//check for the end block size		
-//			if(filelength-8==iterating)
-//			{
-//				char ch = block&0x0000000000000000ff;
-//				short data2remove =0;
-//				data2remove = ch;
-//				mas = 0xffffffffffffff00;
-//				if(ch!=0x08)
-//				{
-//					for(int i = 0; i<data2remove;i++){
-//						block &= mas;
-//						mas<<=8;
-//					}
-//				}
-//				else if(ch==0x08)
-//					break;
-//			}
-//			
-//			//long long mylonglong = 0x74657374696e6773;
-//			char c_ptr[8];
-//			/*unsigned long long tr4y=(block&0xff00000000000000)>>56;*/
-//			c_ptr[7]=(block&0xff00000000000000)>>56;
-//			c_ptr[6]=(block&0x00ff000000000000)>>48;
-//			c_ptr[5]=(block&0x0000ff0000000000)>>40;
-//			c_ptr[4]=(block&0x000000ff00000000)>>32;
-//			c_ptr[3]=(block&0x00000000ff000000)>>24;
-//			c_ptr[2]=(block&0x0000000000ff0000)>>16;
-//			c_ptr[1]=(block&0x000000000000ff00)>>8;
-//			c_ptr[0]=(block&0x00000000000000ff);
-//
-//			fprintf( pplaintextfile,"%c%c%c%c%c%c%c%c", c_ptr[7], c_ptr[6], c_ptr[5], c_ptr[4], c_ptr[3], c_ptr[2], c_ptr[1], c_ptr[0]);
-//			//writing in the plain text file
-//			
-//
-//			iterating+=8;
-//
-//		}
-//
-//			long finishtime = clock();
-//
-//			printf("\ndecryption completed successfully in %d ms\n", finishtime- starttime);
-//			cout<<"";
-//	}
-//	
-//	delete[] pkey;
-//
-//	fclose(pplaintextfile);
-//	fclose(pciphertextfile);
-//	//getch();
-//}
+void main_flow(char* argv[])
+{
+	long startTime = clock();	
+	unsigned char* pKey = 0;
+	unsigned long keyLength = 0;
+	if(!LoadKey((const char*)argv[3], &pKey, &keyLength)){printf("\nError Loading Plain Text File.\n");exit(0);}
+	KeyGenerator(pKey, keyLength);
+
+	FILE* pPlainTextFile = 0;
+	FILE* pCipherTextFile = 0;
+
+	if(stricmp(argv[1], "encrypt")==0)
+	{
+		pPlainTextFile = fopen((const char*)argv[2], "r");
+		if(pPlainTextFile==0){
+			printf("\nError Loading PlainText File.\n");
+			exit(0);
+		}
+
+		pCipherTextFile = fopen((const char*)argv[4], "wb");
+		if(pCipherTextFile==0){printf("\nError Creating CipherText File.\n");exit(0);}
+		//
+		//getting the file size
+		fseek(pPlainTextFile, 0, SEEK_END);
+		int fileLength = ftell(pPlainTextFile);
+		fseek(pPlainTextFile, 0, SEEK_SET);
+
+		
+		char* plainTxtBlock = new char[fileLength]; // the block of data(64 bits)
+		//cout<<
+		
+		char toto[8];	
+		unsigned long long Key = 29699430183026, BlockRight,mas,tem;
+		int iterating = 0;
+		unsigned long long L,R;	
+		int flagDummy = 0;
+		short sh=56, re=8;
+		//Reading the dATA from the file!
+		while(iterating < fileLength){
+			if(flagDummy == 0)
+			{
+				Block = 0;
+				BlockRight=0;
+				fread(&BlockRight,8,1,pPlainTextFile);
+							
+				mas = 0x00000000000000ff;
+				sh=56; re=8;
+				if(fileLength-8<iterating)
+					cout<<"";
+				for(int i =0; i<8;i++){//----------------------------
+					tem = (BlockRight&mas);						
+					if(i<4)
+					{
+						tem<<=sh;
+						Block|=tem;							
+						sh-=16;
+					}
+					else
+					{
+						tem>>=re;
+						Block|=tem;	
+						re+=16;
+					}
+					mas<<=8;
+				}
+				if(fileLength%8==0 && iterating+8==fileLength)
+				{				
+					iterating-=8;
+					flagDummy = 1;				
+				}
+	
+			}
+			else 
+				Block = 0x0808080808080808;
+			//
+			//Block = 0x00006520656d6169;//---------------------Test Block
+			//K1 = 0x0000cb3d8b0e17f5;//-------------test key
+			//check for the end block size	
+			if(fileLength%8!=0 && iterating+8>fileLength)
+			{
+				unsigned long long data2add = 8-((fileLength) % 8);
+				unsigned long long temp = data2add;//data2add<<(8*(8-data2add));
+				for(int i=0;i<data2add;i++)
+				{
+					Block = Block|temp;
+					temp = data2add<<8*(i+1);//(8*((8-data2add)+(i+1)));
+				}
+			}
+
+			if(Block == 0x7365637572697479)
+				cout<<"";
+		
+			//IP
+			Block = perm(Block, ip, 64, 64);
+
+			L = (Block & 0xFFFFFFFF00000000)>>32;
+			R = (Block & 0x00000000FFFFFFFF);
+			//printf("%x", L);
+			//R1
+			Round(K1,&L,&R);
+			//R1
+			Round(K2,&L,&R);
+			//R1
+			Round(K3,&L,&R);
+			//R1
+			Round(K4,&L,&R);
+			//R1
+			Round(K5,&L,&R);
+			//R1
+			Round(K6,&L,&R);
+			//R1
+			Round(K7,&L,&R);
+			//R1
+			Round(K8,&L,&R);
+			//R1
+			Round(K9,&L,&R);
+			//R1
+			Round(K10,&L,&R);
+			//R1
+			Round(K11,&L,&R);
+			//R1
+			Round(K12,&L,&R);
+			//R1
+			Round(K13,&L,&R);
+			//R1
+			Round(K14,&L,&R);
+			//R1
+			Round(K15,&L,&R);
+			//R1
+			Round(K16,&L,&R);
+
+			//32-bit swap
+			unsigned long long temp=0 ;
+			temp= L;
+			L=R;
+			R=temp;
+			Block = 0;
+			Block = L;
+			Block <<=32;
+			Block|=R;
+
+			//INV IP
+			Block=perm( Block, invip,  64, 64);	
+
+			char myBuffer[8];
+				
+
+			char *c_ptr = (char*)&Block;			
+			//sprintf(myBuffer,"%c%c%c%c%c%c%c%c", c_ptr[7], c_ptr[6], c_ptr[5], c_ptr[4], c_ptr[3], c_ptr[2], c_ptr[1], c_ptr[0]);
+			//cout<<myBuffer;
+			fprintf( pCipherTextFile, "%c%c%c%c%c%c%c%c",c_ptr[7], c_ptr[6], c_ptr[5], c_ptr[4], c_ptr[3], c_ptr[2], c_ptr[1], c_ptr[0]);
+			//fwrite((const void*)&Block, 8,1,pCipherTextFile);
+
+			iterating+=8;
+	
+		}
+
+		long finishTime = clock();
+
+		printf("\nEncryption completed successfully in %d ms\n", finishTime- startTime);
+		cout<<"";
+	}
+	else if(stricmp(argv[1], "decrypt")==0)
+	{
+		pPlainTextFile = fopen((const char*)argv[2], "w");
+		if(pPlainTextFile==0){printf("\nError Loading PlainText File.\n");exit(0);}
+
+		pCipherTextFile = fopen((const char*)argv[4], "rb");
+		if(pCipherTextFile==0){printf("\nError Creating CipherText File.\n");exit(0);}
+		//
+		//getting the file size
+		fseek(pCipherTextFile, 0, SEEK_END);
+		int fileLength = ftell(pCipherTextFile);
+		fseek(pCipherTextFile, 0, SEEK_SET);
+		//
+		unsigned long long tem=0,Key = 0, BlockRight=0, mas;
+		int iterating = 0;
+		unsigned long long L = 0,R = 0;
+		short sh=56, re=8; 
+		unsigned char myBuffer[8];
+		//fileLength-=3;
+		//Reading the dATA from the file!
+		while(iterating < fileLength)
+		{	
+
+
+			//reading the 64-bit block						
+			BlockRight=0;
+			Block=0;
+			fread(&myBuffer,8,1,pCipherTextFile);	
+
+			Block |= myBuffer[7];
+			tem = myBuffer[6];
+			Block |= tem<<8;
+			tem = myBuffer[5];
+			Block |= tem<<16;
+			tem = myBuffer[4];
+			Block |= tem<<24;
+			tem = myBuffer[3];
+			Block |= tem<<32;
+			tem = myBuffer[2];
+			Block |= tem<<40;
+			tem = myBuffer[1];
+			Block |= tem<<48;
+			tem = myBuffer[0];
+			Block |= tem<<56;	
+
+			//Block = 0x0123456789abcdef;//---------------------Test Block
+			//K16 = 0x0000cb3d8b0e17f5;//-------------test key
+			// IP
+			if(iterating ==296)
+				cout<<"";
+			Block = perm(Block, ip,  64, 64);
+
+			//
+			L = (Block & 0xFFFFFFFF00000000)>>32;
+			R = (Block & 0x00000000FFFFFFFF);
+		
+			//R16
+			Round(K16,&L,&R);
+			//R15
+			Round(K15,&L,&R);
+			//R14
+			Round(K14,&L,&R);
+			//R13
+			Round(K13,&L,&R);
+			//R12
+			Round(K12,&L,&R);
+			//R11
+			Round(K11,&L,&R);
+			//R10
+			Round(K10,&L,&R);
+			//R9
+			Round(K9,&L,&R);
+			//R8
+			Round(K8,&L,&R);
+			//R7
+			Round(K7,&L,&R);
+			//R6
+			Round(K6,&L,&R);
+			//R5
+			Round(K5,&L,&R);
+			//R4
+			Round(K4,&L,&R);
+			//R3
+			Round(K3,&L,&R);
+			//R2
+			Round(K2,&L,&R);
+			//R1
+			Round(K1,&L,&R);
+			//
+			//32-bit swap
+			unsigned long long temp = 0;
+			temp = L;
+			L=R;
+			R=temp;
+			Block = 0;
+			Block = L;
+			Block <<=32;
+			Block|=R;
+
+			// IP
+			Block=perm( Block, invip,  64, 64);
+
+			//check for the end block size		
+			if(fileLength-8==iterating)
+			{
+				char ch = Block&0x0000000000000000FF;
+				short data2remove =0;
+				data2remove = ch;
+				mas = 0xFFFFFFFFFFFFFF00;
+				if(ch!=0x08)
+				{
+					for(int i = 0; i<data2remove;i++){
+						Block &= mas;
+						mas<<=8;
+					}
+				}
+				else if(ch==0x08)
+					break;
+			}
+			
+			//long long myLongLong = 0x74657374696e6773;
+			char c_ptr[8];
+			/*unsigned long long tr4y=(Block&0xFF00000000000000)>>56;*/
+			c_ptr[7]=(Block&0xFF00000000000000)>>56;
+			c_ptr[6]=(Block&0x00FF000000000000)>>48;
+			c_ptr[5]=(Block&0x0000FF0000000000)>>40;
+			c_ptr[4]=(Block&0x000000FF00000000)>>32;
+			c_ptr[3]=(Block&0x00000000FF000000)>>24;
+			c_ptr[2]=(Block&0x0000000000FF0000)>>16;
+			c_ptr[1]=(Block&0x000000000000FF00)>>8;
+			c_ptr[0]=(Block&0x00000000000000FF);
+
+			fprintf( pPlainTextFile,"%c%c%c%c%c%c%c%c", c_ptr[7], c_ptr[6], c_ptr[5], c_ptr[4], c_ptr[3], c_ptr[2], c_ptr[1], c_ptr[0]);
+			//writing in the Plain text file
+			
+
+			iterating+=8;
+
+		}
+
+			long finishTime = clock();
+
+			printf("\nDecryption completed successfully in %d ms\n", finishTime- startTime);
+			cout<<"";
+	}
+	
+	delete[] pKey;
+
+	fclose(pPlainTextFile);
+	fclose(pCipherTextFile);
+}
 

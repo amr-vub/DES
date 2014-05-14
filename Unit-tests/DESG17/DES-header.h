@@ -1,4 +1,5 @@
 
+void main_flow(char* argv[]);
 
 bool LoadKey(const char* keyFilePath, unsigned char** ppKey, unsigned long* pKeyLength);
 

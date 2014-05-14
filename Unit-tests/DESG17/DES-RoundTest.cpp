@@ -12,7 +12,7 @@ extern int pc1[56], pc2[48];
  * Unit test for the Round Function:
  * Checking
 */
-void Round_unit_test(){
+unsigned long long Round_unit_test(){
 
 	unsigned int C, D;	
 	unsigned long long tem, tem2;
@@ -32,15 +32,6 @@ void Round_unit_test(){
 	Key1 = perm(Key, pc2, 48, 56);
 
 	Round(Key1, &L, &R);
-}
 
-void main(int argc, char* argv[]){
-	Round_unit_test();
-	printf("Right part is %x \n",R);
-	printf("Left part is %x \n",L);
-	if (R == 0x8bddd057)
-		printf("Round Test Passed");
-	else
-		printf("Round Test Failed");
-	printf("stop");
+	return R;
 }
