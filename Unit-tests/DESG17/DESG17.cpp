@@ -539,9 +539,7 @@ void main_flow(char* argv[])
 			}
 			else 
 				Block = 0x0808080808080808;
-			//
-			//Block = 0x00006520656d6169;//---------------------Test Block
-			//K1 = 0x0000cb3d8b0e17f5;//-------------test key
+
 			//check for the end block size	
 			if(fileLength%8!=0 && iterating+8>fileLength)
 			{
@@ -553,9 +551,6 @@ void main_flow(char* argv[])
 					temp = data2add<<8*(i+1);//(8*((8-data2add)+(i+1)));
 				}
 			}
-
-			if(Block == 0x7365637572697479)
-				cout<<"";
 		
 			//IP
 			Block = perm(Block, ip, 64, 64);
