@@ -85,13 +85,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DES-header.h" />
-    <ClInclude Include="DES-RountTest-header.h" />
-    <ClInclude Include="DES-EncryptionTest-header.h" />
+    <ClInclude Include="DES-Tests-header.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DES-DecryptionTest.cpp" />
     <ClCompile Include="DES-EncryptionTest.cpp" />
+    <ClCompile Include="DES-KeyGenTest.cpp" />
     <ClCompile Include="DES-Roundtest.cpp" />
     <ClCompile Include="DESG17.cpp" />
     <ClCompile Include="Run_tests.cpp" />

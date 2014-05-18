@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include <stdio.h>
 #include "DES-header.h"
-#include "DES-RountTest-header.h"
-#include "DES-EncryptionTest-header.h"
+#include "DES-Tests-header.h"
 
 void main(int argc, char* argv[]){
 	// Round unit test
@@ -12,9 +11,17 @@ void main(int argc, char* argv[]){
 		printf("Round Test Passed");
 	else
 		printf("Round Test Failed");
-	printf("stop");
+	
+	//Key generation testing
+	int value=Key_Gen_test();
+	if (value == 1)
+		printf("KeyGen Test Passed\n");
+	else
+		printf("KeyGen Test Failed\n");
 
 	// Encryption flow testing
 	Encryption_unitTest();
+	// Decryption flow testing
+	Decryption_unitTest();
 
 }

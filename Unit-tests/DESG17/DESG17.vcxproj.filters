@@ -28,10 +28,7 @@
     <ClInclude Include="DES-header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DES-RountTest-header.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DES-EncryptionTest-header.h">
+    <ClInclude Include="DES-Tests-header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -49,6 +46,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Run_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DES-DecryptionTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DES-KeyGenTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
