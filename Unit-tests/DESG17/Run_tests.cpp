@@ -8,9 +8,9 @@ void main(int argc, char* argv[]){
 	unsigned long long R = Round_unit_test();
 	printf("Right part is %x \n",R);	
 	if (R == 0x8bddd057)
-		printf("Round Test Passed");
+		printf("Round Test Passed\n");
 	else
-		printf("Round Test Failed");
+		printf("Round Test Failed\n");
 	
 	//Key generation testing
 	int value=Key_Gen_test();
