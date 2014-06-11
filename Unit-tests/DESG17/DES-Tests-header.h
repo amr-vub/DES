@@ -3,3 +3,4 @@ int Key_Gen_test();
 void Encryption_unitTest();
 void Decryption_unitTest();
 void SboxTest();
+int PermTest();
