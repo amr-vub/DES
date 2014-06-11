@@ -20,12 +20,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -94,6 +96,7 @@
     <ClCompile Include="DES-EncryptionTest.cpp" />
     <ClCompile Include="DES-KeyGenTest.cpp" />
     <ClCompile Include="DES-Roundtest.cpp" />
+    <ClCompile Include="DES-SBoxTest.cpp" />
     <ClCompile Include="DESG17.cpp" />
     <ClCompile Include="Run_tests.cpp" />
     <ClCompile Include="stdafx.cpp">

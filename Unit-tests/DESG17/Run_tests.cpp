@@ -8,9 +8,9 @@ void main(int argc, char* argv[]){
 	unsigned long long R = Round_unit_test();
 	printf("Right part is %x \n",R);	
 	if (R == 0x8bddd057)
-		printf("Round Test Passed\n");
+		printf("Round Test Passed");
 	else
-		printf("Round Test Failed\n");
+		printf("Round Test Failed");
 	
 	//Key generation testing
 	int value=Key_Gen_test();
@@ -24,4 +24,6 @@ void main(int argc, char* argv[]){
 	// Decryption flow testing
 	Decryption_unitTest();
 
+	// Sbox test
+	SboxTest();
 }
