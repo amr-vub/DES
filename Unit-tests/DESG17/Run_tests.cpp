@@ -26,4 +26,11 @@ void main(int argc, char* argv[]){
 
 	// Sbox test
 	SboxTest();
+
+	//Permutations testing
+	int permValue=PermTest();
+	if (permValue == 1)
+		printf("\nAll permutations Passed\n");
+	else
+		printf("\nPermutations Test Failed\n");
 }
