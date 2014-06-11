@@ -95,6 +95,7 @@
     <ClCompile Include="DES-DecryptionTest.cpp" />
     <ClCompile Include="DES-EncryptionTest.cpp" />
     <ClCompile Include="DES-KeyGenTest.cpp" />
+    <ClCompile Include="DES-PermTest.cpp" />
     <ClCompile Include="DES-Roundtest.cpp" />
     <ClCompile Include="DES-SBoxTest.cpp" />
     <ClCompile Include="DESG17.cpp" />
