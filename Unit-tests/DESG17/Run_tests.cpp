@@ -8,16 +8,16 @@ void main(int argc, char* argv[]){
 	unsigned long long R = Round_unit_test();
 	printf("Right part is %x \n",R);	
 	if (R == 0x8bddd057)
-		printf("Round Test Passed");
+		printf("\nRound Test Passed\n");
 	else
-		printf("Round Test Failed");
+		printf("\nRound Test Failed\n");
 	
 	//Key generation testing
 	int value=Key_Gen_test();
 	if (value == 1)
-		printf("KeyGen Test Passed\n");
+		printf("\nKeyGen Test Passed\n");
 	else
-		printf("KeyGen Test Failed\n");
+		printf("\nKeyGen Test Failed\n");
 
 	// Encryption flow testing
 	Encryption_unitTest();
@@ -30,7 +30,10 @@ void main(int argc, char* argv[]){
 	//Permutations testing
 	int permValue=PermTest();
 	if (permValue == 1)
-		printf("\nAll permutations Passed\n");
+		printf("\nAll permutations Passed!\n");
 	else
-		printf("\nPermutations Test Failed\n");
+		printf("\nPermutations Test Failed!\n");
+
+	//Rotating testing
+	RotateTest();
 }
