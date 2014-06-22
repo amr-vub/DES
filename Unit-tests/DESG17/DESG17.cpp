@@ -619,8 +619,8 @@ void main_flow(char* argv[])
 
 		long finishTime = clock();
 
-		printf("\nEncryption completed successfully in %d ms\n", finishTime- startTime);
-		cout<<"";
+		//printf("\nEncryption completed successfully in %d ms\n", finishTime- startTime);
+		//cout<<"";
 	}
 	else if(stricmp(argv[1], "decrypt")==0)
 	{
@@ -764,8 +764,8 @@ void main_flow(char* argv[])
 
 			long finishTime = clock();
 
-			printf("\nDecryption completed successfully in %d ms\n", finishTime- startTime);
-			cout<<"";
+			//printf("\nDecryption completed successfully in %d ms\n", finishTime- startTime);
+			//cout<<"";
 	}
 	
 	delete[] pKey;

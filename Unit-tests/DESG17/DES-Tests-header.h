@@ -5,3 +5,4 @@ void Decryption_unitTest();
 void SboxTest();
 int PermTest();
 void RotateTest();
+void loadKeyTest();

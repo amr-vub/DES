@@ -36,4 +36,7 @@ void main(int argc, char* argv[]){
 
 	//Rotating testing
 	RotateTest();
+
+	// Load key test
+	loadKeyTest();
 }
