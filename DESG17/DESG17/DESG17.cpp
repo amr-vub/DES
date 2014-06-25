@@ -645,7 +645,7 @@ void main(int argc, char* argv[])
 		unsigned long long tem=0,Key = 0, BlockRight=0, mas;
 		int iterating = 0;
 		unsigned long long L = 0,R = 0;
-		short sh=56, re=8; 
+		short sh=56, re=8, stop_counter=0; 
 		unsigned char myBuffer[8];
 		//fileLength-=3;
 		//Reading the dATA from the file!
@@ -743,6 +743,7 @@ void main(int argc, char* argv[])
 					for(int i = 0; i<data2remove;i++){
 						Block &= mas;
 						mas<<=8;
+						stop_counter++;
 					}
 				}
 				else if(ch==0x08)
@@ -761,9 +762,11 @@ void main(int argc, char* argv[])
 			c_ptr[1]=(Block&0x000000000000FF00)>>8;
 			c_ptr[0]=(Block&0x00000000000000FF);
 
-			fprintf( pPlainTextFile,"%c%c%c%c%c%c%c%c", c_ptr[7], c_ptr[6], c_ptr[5], c_ptr[4], c_ptr[3], c_ptr[2], c_ptr[1], c_ptr[0]);
-			//writing in the Plain text file
-			
+			for (int i = 8; i > stop_counter; i--)
+			{
+				if(c_ptr[i-1]!=0x0000000000000000)
+					fprintf( pPlainTextFile,"%c", c_ptr[i-1]);
+			}						
 
 			iterating+=8;
 
